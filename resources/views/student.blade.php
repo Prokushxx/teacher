@@ -10,7 +10,7 @@
 <body>
   
   @livewireStyles()
-  @livewire('login')
+  @livewire('add-student')
   @livewireScripts()
   
 </body>
