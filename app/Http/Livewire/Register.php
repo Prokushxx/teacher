@@ -31,8 +31,6 @@ class Register extends Component
       return view('welcome');
     }
 }
-
-
     public function render()
     {
         return view('livewire.register');

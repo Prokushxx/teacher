@@ -8,9 +8,9 @@ use Livewire\Component;
 
 class Login extends Component
 {
-  public $email, $password,$t;
+  public $email, $password, $t;
 
-   
+
   public function login()
   {
     $this->validate([
@@ -20,13 +20,18 @@ class Login extends Component
 
     if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
 
-      if (auth()->user()->user_type == 2) {
-        session()->flash('success', 'You have logged in Teacher');
+      if (auth()->user()->user_type = 1) {
+        session()->flash('success', 'You have logged in Admin');
+        return redirect(url('addstudent'));
+      } elseif (auth()->user()->user_type == 2) {
+        return redirect(url('schedule'));
+      } elseif (auth()->user()->user_type == 3) {
+        return redirect(url('schedule'));
       } else {
-        session()->flash('error', 'NOOOOOOOOO you naaah teach');
+        session()->flash('error', 'Not a teacher cannot log in');
       }
     } else {
-      session()->flash('error', 'NOOOOOOOOO sumn nuh right yah');
+      session()->flash('error', 'Information does not match');
     }
   }
   public function render()

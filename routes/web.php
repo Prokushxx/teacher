@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 
-Route::get('register', function (){
-  return view('reglive');
-});
+Route::get('register', function (){return view('reglive');});
 
-Route::get('addstudent',function(){
-  return view('student');
+Route::middleware(['restrict'])->group(function () {
+  Route::get('addstudent',function(){return view('student');});
+  Route::get('editstudent',function(){return view('student');});
 });
+route::get('schedule',function(){return view('schedule');});
+
 
 
 

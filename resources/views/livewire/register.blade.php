@@ -1,3 +1,4 @@
+
 <div class="w-screen h-screen flex justify-center items-center bg-gray-100">
   <div class="p-10 bg-white rounded flex justify-center items-center flex-col shadow-md">
     <p class="mb-5 text-3xl uppercase text-gray-600">Register</p>
@@ -24,5 +25,8 @@
   @enderror
   <input type="password" placeholder="confirm password" class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none" wire:model="confirmation">
   <button wire:click="Register" class="bg-yellow-500 hover:bg-yellow-300 p-2">Register</button>
+  <a class="inline-block align-baseline mt-5 font-light text-sm text-indigo-600 hover:text-indigo-500" href="{{ url('/') }}">
+    Already have an account?  Login !!
+   </a>
   </div>
 </div>

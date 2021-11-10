@@ -18,11 +18,13 @@
     <input type="password" class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none" wire:model="password">
     <button wire:click="login" class="bg-indigo-600 hover:bg-blue-700 text-white font-light py-2 px-6 rounded focus:outline-none focus:shadow-outline">Login</button>
 
+    
+      <a class="inline-block align-baseline mt-5 font-light text-sm text-indigo-600 hover:text-indigo-500" href="{{ url('register') }}">
+           Don't have an account?  Register !!
+          </a>
 </div>
 </div>
 
 </div>
-{{-- <a class="inline-block align-baseline font-light text-sm text-indigo-600 hover:text-indigo-500" href="#">
-      Forgot Password?
-    </a> --}}
+  
 </div>
