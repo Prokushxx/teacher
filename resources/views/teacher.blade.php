@@ -9,7 +9,7 @@
   @livewireStyles()
 </head>
 <body>
-  @livewire('add-student')
+  @livewire('add-teacher')
   @livewireScripts()
   
 </body>

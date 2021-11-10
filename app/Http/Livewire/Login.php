@@ -33,6 +33,8 @@ class Login extends Component
     } else {
       session()->flash('error', 'Information does not match');
     }
+    $this->email = null; 
+    $this->password = null; 
   }
   public function render()
   {

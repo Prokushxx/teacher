@@ -8,21 +8,21 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
-use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class AddStudent extends Component
 {
-  use WithPagination;
-  public $name, $email, $contact, $select, $studentid, $findid;
+  // use WithPagination;
+  public $name, $email, $contact, $select, $findid, $allcourse;
   public $editmode = false;
 
   public function submit()
   {
     $this->validate([
       'name' => 'required',
-      'email' => 'required|email|unique:users,email',
+      'email' => 'required|email',
       'contact' => 'required',
       'select' => 'required',
+      'course' => 'required',
     ]);
     $studentid = Student::create([
       'name' => $this->name,
@@ -32,7 +32,7 @@ class AddStudent extends Component
       'password' => Hash::make('student01'),
       'user_type' => 3,
     ]);
-    $this->id = $studentid->id;
+
     User::create([
       'name' => $studentid->name,
       'email' => $studentid->email,
@@ -43,15 +43,17 @@ class AddStudent extends Component
     session()->flash('go', 'Student Added');
   }
 
-  public function editstud($id)
+  public function edit($id)
   {
-    $newid = Student::find($id);
-    $this->editmode = True;
-    $this->name = $newid->name;
+    $newid = Student::with('course')->find($id)->get();
+    $this->name = $newid[0]['name'];
+    $this->email = $newid[0]['email'];
+    $this->contact = $newid[0]['contact'];
+    $this->course = $newid[0]['course']['course'];
     $this->findid = $id;
-    $this->email = $newid->email;
-    $this->contact = $newid->contact;
-    $this->course = $newid->course->course;
+    $allcourse = Course::all();
+    $this->allcourse = $allcourse;
+    $this->editmode = True;
   }
 
   public function update()
@@ -60,13 +62,19 @@ class AddStudent extends Component
     $identify->name = $this->name;
     $identify->email = $this->email;
     $identify->contact = $this->contact;
-    $identify->course = $this->select;
+    $identify->course_id = $this->select;
     $identify->save();
     $this->editmode = false;
   }
 
   public function back(){
-    $this->editmode = True;
+    $this->editmode = True; 
+  }
+
+  public function delete($id){
+// dd($id);
+    $delete = Student::find($id);
+    $delete->delete();
   }
 
   public function render()

@@ -14,9 +14,12 @@
           class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none" placeholder="Enter Email">
       <input type="text" wire:model="contact"
           class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none" placeholder="#Tel">
-      <Label class="font-bold text-gray-500">Select Course</Label>
+      <Label class="font-bold text-gray-500">Current Course</Label>
+      <input type="text" wire:model="course"
+      class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none" placeholder="#Tel">
+      <Label class="font-bold text-gray-500">Select New Course</Label>
       <select wire:model="select" class="mb-5 p-3 w-80 focus:border-purple-700 rounded border-2 outline-none">
-          @foreach ($course as $c)
+          @foreach ($allcourse as $c)
               <option value="{{ $c->id }}">{{ $c->course }}</option>
           @endforeach
       </select>
