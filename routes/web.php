@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Logout;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -14,18 +15,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {
+  return view('auth.welcome');
+});
 
-Route::get('register', function (){return view('reglive');});
+Route::get('register', function () {
+  return view('auth.reglive');
+});
 
 Route::middleware(['restrict'])->group(function () {
-  Route::get('addstudent',function(){return view('student');});
-  Route::get('editstudent',function(){return view('student');});
-  Route::get('addteacher',function(){return view('teacher');});
+  Route::get('addstudent', function () {
+    return view('admin.student');
+  });
+  Route::get('editstudent', function () {
+    return view('admin.student');
+  });
+  Route::get('addteacher', function () {
+    return view('admin.teacher');
+  });
+  Route::get('addcourse', function () {
+    return view('admin.course');
+  });
 });
-route::get('schedule',function(){return view('schedule');});
 
+Route::middleware(['schedule'])->group(function () {
+  route::get('schedule', function () {
+    return view('schedule');
+  });
+});
 
-
-
-
+route::get('logout', [Logout::class, 'logout']);

@@ -1,6 +1,7 @@
-@extends('layouts.navbar')
+
 <div>
-<div class="w-screen h-90 flex justify-center items-center bg-gray-100">
+@if (!$editmode)
+<div class="w-screen h-90 flex justify-center items-center bg-gray-100 mt-5">
   <div class="p-10 bg-white rounded flex justify-center items-center flex-col shadow-md">
       <p class="mb-5 text-3xl uppercase text-gray-600">Add Teacher</p>
       @error('email')
@@ -19,9 +20,11 @@
       <button wire:click="submit" class="bg-green-500 p-2 hover:bg-green-300">Add Teacher</button>
 </div>
 </div>
-{{-- @else
+@else
 @include('livewire.editteacher')
-@endif --}}
+@endif
+
+
 <div class=" bg-gray-100">
 <div class="w-2/3 mx-auto bg-gray-100">
 <div class="bg-white shadow-md rounded my-6">
@@ -51,7 +54,7 @@
                   <td class="py-4 px-6 border-b border-grey-light">{{ $teach->contact }}</td>
                   <td class="py-4 px-6 border-b border-grey-light">
 
-                      <button wire:click.prevent="onEdit({{ $teach->id }})"
+                      <button wire:click.prevent="enteredit({{ $teach->id }})"
                           class="text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-yellow-400 hover:bg-yellow-600">Edit</button>
                           
 

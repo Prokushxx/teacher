@@ -1,3 +1,4 @@
+@extends('layouts.navbar')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,12 @@
   <link href="/css/app.css" rel="stylesheet">
   <title>Document</title>
   @livewireStyles()
-</head>
+</head> 
 <body>
-  @livewire('add-teacher')
+  @section('content')
+  @livewire('add-student')
   @livewireScripts()
+  @endsection
   
 </body>
 </html>

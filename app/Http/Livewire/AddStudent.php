@@ -11,8 +11,8 @@ use Livewire\WithPagination;
 
 class AddStudent extends Component
 {
-  // use WithPagination;
-  public $name, $email, $contact, $select, $findid, $allcourse;
+  use WithPagination;
+  public $name, $email, $contact, $select, $findid;
   public $editmode = false;
 
   public function submit()
@@ -22,7 +22,7 @@ class AddStudent extends Component
       'email' => 'required|email',
       'contact' => 'required',
       'select' => 'required',
-      'course' => 'required',
+      
     ]);
     $studentid = Student::create([
       'name' => $this->name,
@@ -39,40 +39,40 @@ class AddStudent extends Component
       'password' => $studentid->password,
       'user_type' => $studentid->user_type,
     ]);
-    // dd($studentid);
     session()->flash('go', 'Student Added');
   }
 
-  public function edit($id)
+  public function edit($unid)
   {
-    $newid = Student::with('course')->find($id)->get();
+    $newid = Student::with('course')->where('id',$unid)->get();
+    // dd($newid);
     $this->name = $newid[0]['name'];
     $this->email = $newid[0]['email'];
     $this->contact = $newid[0]['contact'];
-    $this->course = $newid[0]['course']['course'];
-    $this->findid = $id;
-    $allcourse = Course::all();
-    $this->allcourse = $allcourse;
+    $this->findid = $unid;
     $this->editmode = True;
   }
 
   public function update()
   {
     $identify = Student::find($this->findid);
+    // dd($identify);
     $identify->name = $this->name;
     $identify->email = $this->email;
     $identify->contact = $this->contact;
-    $identify->course_id = $this->select;
     $identify->save();
     $this->editmode = false;
   }
 
   public function back(){
-    $this->editmode = True; 
+    $this->name = null;
+    $this->email = null;
+    $this->contact = null;
+    $this->select = null;
+    $this->editmode = false; 
   }
 
   public function delete($id){
-// dd($id);
     $delete = Student::find($id);
     $delete->delete();
   }

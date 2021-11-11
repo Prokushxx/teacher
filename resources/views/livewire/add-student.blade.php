@@ -1,5 +1,4 @@
 <div>
-@extends('layouts.navbar')
 @if (!$editmode)
     <div class="w-screen h-90 flex justify-center items-center bg-gray-100">
         <div class="p-10 bg-white rounded flex justify-center items-center flex-col shadow-md">
@@ -72,17 +71,8 @@
     </div>
 </div>
 <div>
-    {{-- {{ $students->links() }} --}}
+    {{ $students->links() }}
 </div>
 </div>
-
-
-<div>
-{{-- @foreach ($students as $s)
-  <div class="flex flex-row">
-    <p>{{ $s->name }}</p>
-    <button wire:click="onEdit({{ $s['id'] }})"> Edit</button>
-  </div>
-    @endforeach --}}
 </div>
 </div>

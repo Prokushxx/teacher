@@ -19,22 +19,14 @@ class Login extends Component
     ]);
 
     if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
-
-      if (auth()->user()->user_type = 1) {
-        session()->flash('success', 'You have logged in Admin');
+      if (auth()->user()->user_type == 1) {
         return redirect(url('addstudent'));
-      } elseif (auth()->user()->user_type == 2) {
-        return redirect(url('schedule'));
-      } elseif (auth()->user()->user_type == 3) {
-        return redirect(url('schedule'));
       } else {
-        session()->flash('error', 'Not a teacher cannot log in');
+        return  redirect(url('schedule'));
       }
     } else {
-      session()->flash('error', 'Information does not match');
+      session()->flash('error', 'Something is wrong');
     }
-    $this->email = null; 
-    $this->password = null; 
   }
   public function render()
   {
